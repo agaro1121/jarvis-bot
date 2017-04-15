@@ -1,23 +1,22 @@
-/**
- * Created by hierro on 4/14/17.
- */
+'use strict';
 
 module.exports = (robot) => {
-  const url = "https://api.github.com/users/agaro1121";
+  robot.respond(/show (\w*)/i, (res) => {
+    let username = res.match[1];
+    let userEmail = res.message.user.profile.email;
+    console.log(userEmail);
+    // if(userEmail == "") { //works !!!!!
+      res.http(`https://api.github.com/users/${username}`)
+        .get()((err, response, body) => {
+          console.log("activated http callback");
 
-  robot.respond(/show all/i, function(resOut) {
-    console.log("GET request on url="+url+"...");
-    robot.http(url).get(function(err, res){
-        console.log("something goes here");
+          // res.send(response.statusMessage);
+          res.send("```\n" + JSON.stringify(JSON.parse(body), null, 2) + "\n```"); //works
 
-        console.log("err="+err);
-        console.log("res="+res);
-        res.send("uhhhhhh")
 
-    });
-    resOut.send("SUP BITCHES!!!");
-
+        });
+    // } else {
+      res.send("unauthorized user");
+    // }
   });
-
-
 }

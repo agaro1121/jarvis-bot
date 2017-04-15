@@ -10,6 +10,13 @@
 
 module.exports = (robot) ->
 
+  module.exports = (robot) ->
+  robot.respond /yoyo/i, (msg) ->
+#    msg.http("https://api.github.com/users/agaro1121")
+    msg.http("http://www.google.com")
+      .get() (err, res, body) ->
+        msg.send body
+
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #
@@ -74,20 +81,20 @@ module.exports = (robot) ->
   #     res.send "Not annoying you right now, am I?"
   #
   #
-  # robot.router.post '/hubot/chatsecrets/:room', (req, res) ->
-  #   room   = req.params.room
-  #   data   = JSON.parse req.body.payload
-  #   secret = data.secret
-  #
-  #   robot.messageRoom room, "I have a secret: #{secret}"
-  #
-  #   res.send 'OK'
-  #
-  # robot.error (err, res) ->
-  #   robot.logger.error "DOES NOT COMPUTE"
-  #
-  #   if res?
-  #     res.reply "DOES NOT COMPUTE"
+#   robot.router.post '/hubot/chatsecrets/:room', (req, res) ->
+#     room   = req.params.room
+#     data   = JSON.parse req.body.payload
+#     secret = data.secret
+#
+#     robot.messageRoom room, "I have a secret: #{secret}"
+#
+#     res.send 'OK'
+#
+#   robot.error (err, res) ->
+#     robot.logger.error "DOES NOT COMPUTE"
+#
+#     if res?
+#       res.reply "DOES NOT COMPUTE"
   #
   # robot.respond /have a soda/i, (res) ->
   #   # Get number of sodas had (coerced to a number).
